@@ -2,8 +2,8 @@ from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
-from general_information.models import GeneralInformation
-from general_information.serializers import GeneralInformationSerializer
+from elections.models import GeneralInformation
+from elections.serializers import GeneralInformationSerializer
 
 @csrf_exempt
 def general_information_list(request):

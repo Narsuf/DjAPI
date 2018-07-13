@@ -1,5 +1,5 @@
 from django.conf.urls import url
-from general_information import views
+from elections import views
 
 urlpatterns = [
     url(r'^general_information/$', views.general_information_list),

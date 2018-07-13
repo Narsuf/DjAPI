@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from general_information.models import GeneralInformation
+from elections.models import GeneralInformation
 
 class GeneralInformationSerializer(serializers.ModelSerializer):
     class Meta:
