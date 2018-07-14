@@ -12,5 +12,16 @@ class GeneralInformation(models.Model):
     null_votes = models.IntegerField()
 
     class Meta:
-        ordering = ('year', 'place', 'chamber_name',)
+        ordering = ('year', 'place', 'chamber_name')
     
+class Party(models.Model):
+    name = models.CharField(max_length=30)
+    elects = models.IntegerField()
+    votes = models.IntegerField()
+    color = models.CharField(max_length=30)
+    chamber_name = models.CharField(max_length=30)
+    place = models.CharField(max_length=50)
+    year = models.IntegerField()
+
+    class Meta:
+        ordering = ('color', 'year', 'place', 'chamber_name')
