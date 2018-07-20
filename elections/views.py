@@ -21,9 +21,9 @@ def general_information_list(request):
         return JsonResponse(serializer.errors, status=400)
 
 @csrf_exempt
-def general_information_detail(request, pk):
+def general_information_detail(request, year, place, chamber_name):
     try:
-        general_information = GeneralInformation.objects.get(pk=pk)
+        general_information = GeneralInformation.objects.get(year=year, place=place, chamber_name=chamber_name)
     except GeneralInformation.DoesNotExist:
         return HttpResponse(status=404)
 
@@ -59,9 +59,9 @@ def party_list(request):
         return JsonResponse(serializer.errors, status=400)
 
 @csrf_exempt
-def party_detail(request, pk):
+def party_detail(request, year, place, chamber_name, color):
     try:
-        party = Party.objects.get(pk=pk)
+        party = Party.objects.get(year=year, place=place, chamber_name=chamber_name, color=color)
     except Party.DoesNotExist:
         return HttpResponse(status=404)
 
