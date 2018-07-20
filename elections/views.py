@@ -44,9 +44,9 @@ def general_information_detail(request, year, place, chamber_name):
         return HttpResponse(status=204)
 
 @csrf_exempt
-def party_list(request):
+def party_list(request, year, place, chamber_name):
     if request.method == 'GET':
-        party = Party.objects.all()
+        party = Party.objects.filter(year=year, place=place, chamber_name=chamber_name)
         serializer = PartySerializer(party, many=True)
         return JsonResponse(serializer.data, safe=False)
 
