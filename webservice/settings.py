@@ -38,7 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'general_information.apps.GeneralInformationConfig'
+    'general_information.apps.ElectionsConfig'
 ]
 
 MIDDLEWARE = [
