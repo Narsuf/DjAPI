@@ -22,7 +22,7 @@ class Party(models.Model):
     class Meta:
         ordering = ('name',)
 
-class PartyElection(models.Model):
+class Results(models.Model):
     party = models.ForeignKey(Party, on_delete=models.CASCADE)
     election = models.ForeignKey(Election, on_delete=models.CASCADE)
     elects = models.IntegerField()

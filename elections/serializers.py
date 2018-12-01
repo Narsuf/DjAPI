@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from elections.models import Election, Party, PartyElection
+from elections.models import Election, Party, Results
 
 class ElectionSerializer(serializers.ModelSerializer):
     class Meta:
@@ -11,7 +11,7 @@ class PartySerializer(serializers.ModelSerializer):
         model = Party
         fields = ('name', 'color')
 
-class PartyElectionSerializer(serializers.ModelSerializer):
+class ResultsSerializer(serializers.ModelSerializer):
     class Meta: 
-        model = PartyElection
+        model = Results
         fields = ('elects', 'votes', 'party', 'election')
