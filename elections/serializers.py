@@ -1,12 +1,17 @@
 from rest_framework import serializers
-from elections.models import GeneralInformation, Party
+from elections.models import Election, Party, PartyElection
 
-class GeneralInformationSerializer(serializers.ModelSerializer):
+class ElectionSerializer(serializers.ModelSerializer):
     class Meta:
-        model = GeneralInformation
-        fields = ('id','chamber_name','place','year','census','scrutinized','valid_votes','abstentions','blank_votes','null_votes')
+        model = Election
+        fields = ('year', 'name', 'place', 'chamber_name', 'total_elects', 'scrutinized', 'valid_votes', 'abstentions', 'blank_votes', 'null_votes')
 
 class PartySerializer(serializers.ModelSerializer):
     class Meta:
         model = Party
-        fields = ('id', 'name', 'elects', 'votes', 'color', 'chamber_name','place','year')
+        fields = ('name', 'color')
+
+class PartyElectionSerializer(serializers.ModelSerializer):
+    class Meta: 
+        model = PartyElection
+        fields = ('elects', 'votes', 'party', 'election')
