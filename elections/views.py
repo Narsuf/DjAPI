@@ -47,7 +47,7 @@ def election_detail(request, year, place, chamber_name):
 def results_list(request, year, place, chamber_name):
     if request.method == 'GET':
         election = Election.objects.filter(year=year, place=place, chamber_name=chamber_name)
-        results = Results.objects.filter(election=election)
+        results = Results.objects.filter(election=election[0])
         serializer = ResultsSerializer(results, many=True)
         return JsonResponse(serializer.data, safe=False)
 
@@ -62,7 +62,9 @@ def results_list(request, year, place, chamber_name):
 @csrf_exempt
 def results_detail(request, year, place, chamber_name, name):
     try:
-        results = Results.objects.filter(year=election.year, place=election.place, chamber_name=election.chamber_name, name=party.name)
+        election = Election.objects.filter(year=year, place=place, chamber_name=chamber_name)
+        party = Party.objects.filter(name=name)
+        results = Results.objects.filter(election=election[0], party=party[0])
     except Party.DoesNotExist:
         return HttpResponse(status=404)
 
