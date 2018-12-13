@@ -2,8 +2,10 @@ from django.conf.urls import url
 from elections import views
 
 urlpatterns = [
-    url(r'^general_information/$', views.general_information_list),
-    url(r'^general_information/(?P<year>[0-9]{4})/(?P<place>\w+)/(?P<chamber_name>\w+)/$', views.general_information_detail),
-    url(r'^party/(?P<year>[0-9]{4})/(?P<place>\w+)/(?P<chamber_name>\w+)/$', views.party_list),
-    url(r'^party/(?P<year>[0-9]{4})/(?P<place>\w+)/(?P<chamber_name>\w+)/(?P<color>\w+)/$', views.party_detail),
+    url(r'^elections/$', views.elections_list),
+    url(r'^election/(?P<year>[0-9]{4})/(?P<place>\w+)/(?P<chamber_name>\w+)/$', views.election_detail),
+    url(r'^parties/$', views.parties_list),
+    url(r'^party/(?P<name>\w+)/$', views.party_detail),
+    url(r'^results/(?P<year>[0-9]{4})/(?P<place>\w+)/(?P<chamber_name>\w+)/$', views.results_list),
+    url(r'^results/(?P<year>[0-9]{4})/(?P<place>\w+)/(?P<chamber_name>\w+)/(?P<name>\w+)/$', views.results_detail)
 ]
