@@ -4,7 +4,7 @@ from elections.models import Election, Party, Results
 class ElectionSerializer(serializers.ModelSerializer):
     class Meta:
         model = Election
-        fields = ('year', 'name', 'place', 'chamber_name', 'total_elects', 'scrutinized', 'valid_votes', 'abstentions', 'blank_votes', 'null_votes')
+        fields = ('id', 'year', 'name', 'place', 'chamber_name', 'total_elects', 'scrutinized', 'valid_votes', 'abstentions', 'blank_votes', 'null_votes')
 
 class PartySerializer(serializers.ModelSerializer):
     class Meta:
