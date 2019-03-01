@@ -14,4 +14,4 @@ class PartySerializer(serializers.ModelSerializer):
 class ResultsSerializer(serializers.ModelSerializer):
     class Meta: 
         model = Results
-        fields = ('elects', 'votes', 'party', 'election')
+        fields = ('id', 'elects', 'votes', 'party', 'election')
