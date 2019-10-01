@@ -21,6 +21,13 @@ def elections_list(request):
         return JsonResponse(serializer.errors, status=400)
 
 @csrf_exempt
+def election_list_filtered_by_place_and_chamber(request, place, chamber_name):
+    if request.method == 'GET':
+        elections = Election.objects.filter(place=place, chamber_name=chamber_name)
+        serializer = ElectionSerializer(elections, many=True)
+        return JsonResponse(serializer.data, safe=False)
+
+@csrf_exempt
 def election_detail(request, year, place, chamber_name):
     try:
         election = Election.objects.get(year=year, place=place, chamber_name=chamber_name)

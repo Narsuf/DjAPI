@@ -3,6 +3,7 @@ from elections import views
 
 urlpatterns = [
     url(r'^elections/$', views.elections_list),
+    url(r'^elections/(?P<place>\w+)/(?P<chamber_name>\w+)/$', views.election_list_filtered_by_place_and_chamber),
     url(r'^election/(?P<year>[0-9]{4})/(?P<place>\w+)/(?P<chamber_name>\w+)/$', views.election_detail),
     url(r'^parties/$', views.parties_list),
     url(r'^party/(?P<name>\w+)/$', views.party_detail),

@@ -1,5 +1,9 @@
 # Release notes 
 
+### 1.1.1 (2019-10-01)
+
+* Now the election year is an optional param.
+
 ### 1.1.0 (2019-09-30)
 
 * Party's name is now nested in `Party` object along with the party's color inside the results response.
