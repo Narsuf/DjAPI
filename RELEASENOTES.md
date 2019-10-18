@@ -1,4 +1,8 @@
-# Release notes 
+# Release notes
+
+### 1.2.0 (2019-10-18)
+
+* Now the election response returns all the necessary data.
 
 ### 1.1.1 (2019-10-01)
 
