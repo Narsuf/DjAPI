@@ -9,41 +9,51 @@ from elections.serializers import ElectionSerializer, PartySerializer, ResultsSe
 def elections_list(request):
     if request.method == 'GET':
         elections = Election.objects.all()
+
+        year = request.GET.get('year')
+        if year:
+            elections = elections.filter(year = year)
+        
+        place = request.GET.get('place')
+        if place:
+            elections = elections.filter(place = place)
+
+        chamber_name = request.GET.get('chamberName')
+        if chamber_name:
+            elections = elections.filter(chamber_name = chamber_name)
+
         serializer = ElectionSerializer(elections, many=True)
         return JsonResponse(serializer.data, safe=False)
 
     elif request.method == 'POST':
         data = JSONParser().parse(request)
         serializer = ElectionSerializer(data=data)
+
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data, status=201)
+
         return JsonResponse(serializer.errors, status=400)
 
 @csrf_exempt
-def election_list_filtered_by_place_and_chamber(request, place, chamber_name):
-    if request.method == 'GET':
-        elections = Election.objects.filter(place=place, chamber_name=chamber_name)
-        serializer = ElectionSerializer(elections, many=True)
-        return JsonResponse(serializer.data, safe=False)
-
-@csrf_exempt
-def election_detail(request, year, place, chamber_name):
+def election_detail(request, id):
     try:
-        election = Election.objects.get(year=year, place=place, chamber_name=chamber_name)
+        election = Election.objects.get(id = id)
     except Election.DoesNotExist:
         return HttpResponse(status=404)
 
     if request.method == 'GET':
         serializer = ElectionSerializer(election)
         return JsonResponse(serializer.data)
-    
+
     elif request.method == 'PUT':
         data = JSONParser().parse(request)
         serializer = ElectionSerializer(election, data=data)
+
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data)
+
         return JsonResponse(serializer.errors, status=400)
 
     elif request.method == 'DELETE':
@@ -60,28 +70,32 @@ def parties_list(request):
     elif request.method == 'POST':
         data = JSONParser().parse(request)
         serializer = PartySerializer(data=data)
+
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data, status=201)
+
         return JsonResponse(serializer.errors, status=400)
 
 @csrf_exempt
-def party_detail(request, name):
+def party_detail(request, id):
     try:
-        party = Party.objects.get(name=name)
+        party = Party.objects.get(id = id)
     except Party.DoesNotExist:
         return HttpResponse(status=404)
 
     if request.method == 'GET':
         serializer = PartySerializer(party)
         return JsonResponse(serializer.data)
-    
+
     elif request.method == 'PUT':
         data = JSONParser().parse(request)
         serializer = PartySerializer(party, data=data)
+
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data)
+
         return JsonResponse(serializer.errors, status=400)
 
     elif request.method == 'DELETE':
@@ -89,40 +103,41 @@ def party_detail(request, name):
         return HttpResponse(status=204)
 
 @csrf_exempt
-def results_list(request, year, place, chamber_name):
+def results_list(request):
     if request.method == 'GET':
-        election = Election.objects.get(year=year, place=place, chamber_name=chamber_name)
-        results = Results.objects.filter(election=election)
+        results = Results.objects.all()
         serializer = ResultsSerializer(results, many=True)
         return JsonResponse(serializer.data, safe=False)
 
     elif request.method == 'POST':
         data = JSONParser().parse(request)
         serializer = ResultsSerializer(data=data)
+
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data, status=201)
+
         return JsonResponse(serializer.errors, status=400)
 
 @csrf_exempt
-def results_detail(request, year, place, chamber_name, name):
+def results_detail(request, id):
     try:
-        election = Election.objects.get(year=year, place=place, chamber_name=chamber_name)
-        party = Party.objects.get(name=name)
-        results = Results.objects.get(election=election, party=party)
+        results = Results.objects.get(id = id)
     except Results.DoesNotExist:
         return HttpResponse(status=404)
 
     if request.method == 'GET':
         serializer = ResultsSerializer(results)
         return JsonResponse(serializer.data)
-    
+
     elif request.method == 'PUT':
         data = JSONParser().parse(request)
         serializer = ResultsSerializer(results, data=data)
+
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data)
+            
         return JsonResponse(serializer.errors, status=400)
 
     elif request.method == 'DELETE':

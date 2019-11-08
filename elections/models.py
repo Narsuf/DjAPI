@@ -16,7 +16,7 @@ class Election(models.Model):
         ordering = ('year', 'name', 'place', 'chamber_name')
 
 class Party(models.Model):
-    name = models.CharField(primary_key=True, max_length=30)
+    name = models.CharField(max_length=30)
     color = models.CharField(max_length=30)
 
     class Meta:
