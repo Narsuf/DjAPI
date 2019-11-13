@@ -1,5 +1,8 @@
 # Release notes
 
+### 2.0.1 (2019-11-13)
+* Election's field year has been replaced by date.
+
 ### 2.0.0 (2019-11-08)
 * Now the way to filter the requests matches the standard.
 

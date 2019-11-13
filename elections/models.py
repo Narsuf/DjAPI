@@ -1,7 +1,7 @@
 from django.db import models
     
 class Election(models.Model):
-    year = models.IntegerField()
+    date = models.CharField(max_length=8)
     name = models.CharField(max_length=30)
     place = models.CharField(max_length=50)
     chamber_name = models.CharField(max_length=30)
@@ -13,7 +13,7 @@ class Election(models.Model):
     null_votes = models.IntegerField()
 
     class Meta: 
-        ordering = ('year', 'name', 'place', 'chamber_name')
+        ordering = ('date', 'name', 'place', 'chamber_name')
 
 class Party(models.Model):
     name = models.CharField(max_length=30)
