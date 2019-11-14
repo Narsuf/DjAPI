@@ -1,5 +1,8 @@
 # Release notes
 
+### 2.0.2 (2019-11-14)
+* Every field from Results model will be returned now.
+
 ### 2.0.1 (2019-11-13)
 * Election's field year has been replaced by date.
 

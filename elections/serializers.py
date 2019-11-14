@@ -11,7 +11,7 @@ class ResultsSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Results
-        fields = ('elects', 'votes', 'party')
+        fields = ('__all__')
 
 class ElectionSerializer(serializers.ModelSerializer):
     results = ResultsSerializer(source='results_set', many=True)
