@@ -23,7 +23,8 @@ def elections_list(request):
             elections = elections.filter(chamber_name = chamber_name)
 
         serializer = ElectionSerializer(elections, many=True)
-        return JsonResponse(serializer.data, safe=False)
+        dataDict = {'data': serializer.data}
+        return JsonResponse(dataDict, safe=False)
 
     elif request.method == 'POST':
         data = JSONParser().parse(request)

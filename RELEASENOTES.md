@@ -1,5 +1,8 @@
 # Release notes
 
+### 2.1.0 (2020-08-11)
+* Elections response is now wrapped by data.
+
 ### 2.0.2 (2019-11-14)
 * Every field from Results model will be returned now.
 
