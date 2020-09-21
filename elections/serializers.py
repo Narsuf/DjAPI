@@ -13,9 +13,19 @@ class ResultsSerializer(serializers.ModelSerializer):
         model = Results
         fields = ('__all__')
 
+class ResultsPostSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Results
+        fields = ('__all__')
+
 class ElectionSerializer(serializers.ModelSerializer):
     results = ResultsSerializer(source='results_set', many=True)
 
+    class Meta:
+        model = Election
+        fields = ('__all__')
+
+class ElectionPostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Election
         fields = ('__all__')

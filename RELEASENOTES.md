@@ -1,5 +1,8 @@
 # Release notes
 
+### 2.1.1 (2020-09-21)
+* POST and PUT requests fixed.
+
 ### 2.1.0 (2020-08-11)
 * Elections response is now wrapped by data.
 

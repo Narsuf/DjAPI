@@ -3,7 +3,7 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
 from elections.models import Election, Party, Results
-from elections.serializers import ElectionSerializer, PartySerializer, ResultsSerializer
+from elections.serializers import ElectionSerializer, PartySerializer, ResultsSerializer, ResultsPostSerializer, ElectionPostSerializer
 
 @csrf_exempt
 def elections_list(request):
@@ -13,7 +13,7 @@ def elections_list(request):
         year = request.GET.get('year')
         if year:
             elections = elections.filter(year = year)
-        
+
         place = request.GET.get('place')
         if place:
             elections = elections.filter(place = place)
@@ -28,7 +28,7 @@ def elections_list(request):
 
     elif request.method == 'POST':
         data = JSONParser().parse(request)
-        serializer = ElectionSerializer(data=data)
+        serializer = ElectionPostSerializer(data=data)
 
         if serializer.is_valid():
             serializer.save()
@@ -49,7 +49,7 @@ def election_detail(request, id):
 
     elif request.method == 'PUT':
         data = JSONParser().parse(request)
-        serializer = ElectionSerializer(election, data=data)
+        serializer = ElectionPostSerializer(election, data=data)
 
         if serializer.is_valid():
             serializer.save()
@@ -112,7 +112,7 @@ def results_list(request):
 
     elif request.method == 'POST':
         data = JSONParser().parse(request)
-        serializer = ResultsSerializer(data=data)
+        serializer = ResultsPostSerializer(data=data)
 
         if serializer.is_valid():
             serializer.save()
@@ -133,12 +133,12 @@ def results_detail(request, id):
 
     elif request.method == 'PUT':
         data = JSONParser().parse(request)
-        serializer = ResultsSerializer(results, data=data)
+        serializer = ResultsPostSerializer(results, data=data)
 
         if serializer.is_valid():
             serializer.save()
             return JsonResponse(serializer.data)
-            
+
         return JsonResponse(serializer.errors, status=400)
 
     elif request.method == 'DELETE':
