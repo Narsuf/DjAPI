@@ -45,7 +45,8 @@ def election_detail(request, id):
 
     if request.method == 'GET':
         serializer = ElectionSerializer(election)
-        return JsonResponse(serializer.data)
+        dataDict = {'data': serializer.data}
+        return JsonResponse(dataDict)
 
     elif request.method == 'PUT':
         data = JSONParser().parse(request)
